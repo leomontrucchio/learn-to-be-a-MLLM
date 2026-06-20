@@ -191,7 +191,6 @@ class QwenAlignedStudent(torch.nn.Module):
             torch.nn.Linear(hidden_features, out_features),
         )
         
-        # Shortcut per la connessione residua
         if in_features != out_features:
             self.shortcut = torch.nn.Linear(in_features, out_features)
         else:
@@ -287,7 +286,7 @@ class FeatureProjectionMLP_TrainableProj(torch.nn.Module):
         self.act_fcn = act_layer()
 
     def forward(self, x, pe_matrix):
-        # Trasformiamo il PE sinusoidale prima di usarlo
+
         mapped_pe = self.pe_mapper(pe_matrix)
         x_enriched = torch.cat([x, mapped_pe], dim=-1)
         
